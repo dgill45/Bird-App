@@ -10,4 +10,15 @@ class BirdsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
         render json: 'bird not found', status: :not_found
     end
+
+    def create
+        bird = Bird.create(bird_params)
+        render json: bird, status: :created
+    end
+
+    private
+    def bird_params
+        params.permit(:name, :species)
+    end
+    
 end
